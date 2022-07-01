@@ -1,18 +1,20 @@
-export default function initScrollSuave() {
-  const linksInternos = document.querySelectorAll(
-    '[data-menu="menu"] a[href^="#"]'
-  );
+export default class Scrollsuave {
+  constructor(links, options) {
+    this.linksInternos = document.querySelectorAll(links);
+    if (options === undefined) {
+      this.options = { behavior: 'smooth', block: 'start' };
+    } else {
+      this.options = options;
+    }
+    this.scrollToSection = this.scrollToSection.bind(this);
+  }
 
-  function scrollToSection(event) {
+  scrollToSection(event) {
     event.preventDefault(); // previne o comportamento padrão
-    const href = event.currentTarget.getAttribute("href"); // salva na variavel href o atributo "href" do target do click
+    const href = event.currentTarget.getAttribute('href'); // salva na variavel href o atributo "href" do target do click
     const section = document.querySelector(href); // Retorna o elemento html que tem o id igual ao atributo da variavel href
     // const topo = section.offsetTop;
-
-    section.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
+    section.scrollIntoView(this.options);
     // Forma alternativa
     // const topo = section.offsetTop;
     // window.scrollTo({
@@ -21,7 +23,16 @@ export default function initScrollSuave() {
     // })
   }
 
-  linksInternos.forEach((link) => {
-    link.addEventListener("click", scrollToSection);
-  });
+  addLinkEvent() {
+    this.linksInternos.forEach((link) => {
+      link.addEventListener('click', this.scrollToSection);
+    });
+  }
+
+  init() {
+    if (this.linksInternos.length) {
+      this.addLinkEvent();
+    }
+    return this;
+  }
 }

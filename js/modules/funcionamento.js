@@ -1,10 +1,30 @@
-export default function initFuncionamento() {
-  const funcionamento = document.querySelector("[data-semana]");
+export default class Funcionamento {
+  constructor(funcionamentoTarget) {
+    this.funcionamento = document.querySelector(funcionamentoTarget);
+    this.activeClass = 'aberto';
+  }
 
-  const diaAgora = new Date().getDay();
-  const horarioAgora = new Date().getHours();
+  dadosAgora() {
+    this.diaAgora = new Date().getDay();
+    this.horarioAgora = new Date().getHours();
+  }
 
-  if (diaAgora > 0 && diaAgora < 6 && horarioAgora >= 8 && horarioAgora < 18) {
-    funcionamento.classList.add("aberto");
+  estaAberto() {
+    this.dadosAgora();
+    if (
+      this.diaAgora > 0 &&
+      this.diaAgora < 6 &&
+      this.horarioAgora >= 8 &&
+      this.horarioAgora < 18
+    ) {
+      this.funcionamento.classList.add(this.activeClass);
+    }
+  }
+
+  init() {
+    if (this.funcionamento) {
+      this.estaAberto();
+    }
+    return this;
   }
 }

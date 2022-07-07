@@ -3,12 +3,12 @@ import Accordion from './modules/accordion.js';
 import TabNav from './modules/tab-nav.js';
 import Modal from './modules/modal.js';
 import Tooltip from './modules/tooltip.js';
-import initDropDown from './modules/dropdown.js';
 import initMenuMobile from './modules/menu-mobile.js';
 import initFuncionamento from './modules/funcionamento.js';
 import fetchAnimais from './modules/fetch-animais.js';
 import fetchBitcoin from './modules/fetch-bitcoin.js';
 import ScrollAnima from './modules/scroll-anima.js';
+import DropDown from './modules/dropdown.js';
 
 const scrollSuave = new Scrollsuave('[data-menu="suave"] a[href^="#"]');
 scrollSuave.init();
@@ -35,7 +35,9 @@ tooltip.init();
 const scrollAnima = new ScrollAnima("[data-anime='scroll']");
 scrollAnima.init();
 
-initDropDown();
+const dropdownMenu = new DropDown('[data-dropdown]');
+dropdownMenu.init();
+
 initMenuMobile();
 initFuncionamento();
 fetchAnimais('../../animaisapi.json', '.numeros-grid');

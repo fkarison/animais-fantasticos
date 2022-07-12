@@ -9,6 +9,7 @@
 [data-dropdown]:hover .dropdown-menu,
 [data-dropdown].active .dropdown-menu {
   display: block;
+  animation: show-up 0.3s forwards;
 }
 
 .dropdown-menu {
@@ -22,7 +23,7 @@
 
 .dropdown-menu::before {
   position: absolute;
-  content: "";
+  content: '';
   width: 0;
   height: 0;
   top: -10px;
@@ -48,5 +49,12 @@
   to {
     opacity: 1;
     transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (max-width: 425px) {
+  [data-dropdown] .dropdown-menu {
+    display: block;
+    animation: show-up 0.3s forwards;
   }
 }
